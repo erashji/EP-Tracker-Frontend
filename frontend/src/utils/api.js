@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const getBaseUrl = () => {
   // Use environment variable for backend URL, fallback to empty string if not set
-  return process.env.REACT_APP_API_URL || '';
+  return process.env.REACT_APP_API_URL;
 };
 
 const api = axios.create({
