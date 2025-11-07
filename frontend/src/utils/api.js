@@ -1,9 +1,8 @@
 import axios from 'axios';
 
 const getBaseUrl = () => {
-  // Replace with your backend server's IP address
-  const serverIP = window.location.hostname === 'localhost' ? 'localhost' : 'localhost';
-  return `http://${serverIP}:8000`;
+  // Use environment variable for backend URL, fallback to empty string if not set
+  return process.env.REACT_APP_API_URL || '';
 };
 
 const api = axios.create({
