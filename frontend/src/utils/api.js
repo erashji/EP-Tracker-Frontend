@@ -43,4 +43,23 @@ api.interceptors.response.use(
 // Get all projects with all fields
 export const getAllProjectsWithFields = () => api.get('/api/expenses/projects/all-fields');
 
+// Submit new expense (with file upload)
+export const submitExpense = async (expenseData, travelReceiptFile) => {
+  const formData = new FormData();
+  Object.entries(expenseData).forEach(([key, value]) => {
+    formData.append(key, value);
+  });
+  if (travelReceiptFile) {
+    formData.append('travelReceipt', travelReceiptFile);
+  }
+  // Use axios directly for multipart/form-data
+  const response = await api.post('/api/expenses/submit', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+  // The backend will return S3 URL in travelReceiptUrl
+  return response.data;
+};
+
 export default api;
